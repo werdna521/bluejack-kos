@@ -8,4 +8,6 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="phone_number">Phone Number</string>
     <string name="register_text">Register to start using Bluejack Kos</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 </resources>
