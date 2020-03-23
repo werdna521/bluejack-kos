@@ -25,4 +25,8 @@
     <string name="birthday_error">Please select a valid date</string>
     <string name="gender_error">Gender must be selected</string>
     <string name="terms_error">Agreement must be checked</string>
+    <string name="username_must_filled">Username must be filled</string>
+    <string name="password_must_filled">Password must be filled</string>
+    <string name="wrong_credentials">Wrong credentials</string>
+    <string name="kos_list">Kos List</string>
 </resources>
