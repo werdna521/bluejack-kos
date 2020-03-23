@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="411dp"
+        android:height="731dp"
+        android:drawable="@drawable/gradient_bg" />
+    <item
+        android:width="161dp"
+        android:height="200dp"
+        android:top="52dp"
+        android:drawable="@drawable/left_circle" />
+    <item
+        android:width="159dp"
+        android:height="250dp"
+        android:gravity="right|end"
+        android:top="136dp"
+        android:drawable="@drawable/right_circle" />
+    <item
+        android:width="100dp"
+        android:height="68dp"
+        android:left="232dp"
+        android:start="232dp"
+        android:drawable="@drawable/top_circle" />
+</layer-list>
