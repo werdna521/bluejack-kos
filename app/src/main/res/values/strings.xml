@@ -10,4 +10,19 @@
     <string name="register_text">Register to start using Bluejack Kos</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="date_format">%1$d - %2$d - %3$d</string>
+    <string name="terms_message">Agree with the user terms</string>
+    <string name="username_length_error">Username\'s length must be between 3–25</string>
+    <string name="username_alphanumeric_error">Username must contain at least 1 number and is alphanumeric</string>
+    <string name="username_taken_error">Username has been taken</string>
+    <string name="password_length_error">Password must be more than 6 characters</string>
+    <string name="password_regex_error">Password must contain at least 1 lowercase letter, 1 uppercase letter and 1 digit</string>
+    <string name="phone_number_length_error">Phone number must be between 10–12 digits</string>
+    <string name="phone_number_regex_error">Phone number must contain only numbers</string>
+    <string name="confirm_password_error">Must be same as password</string>
+    <string name="birthday_error">Please select a valid date</string>
+    <string name="gender_error">Gender must be selected</string>
+    <string name="terms_error">Agreement must be checked</string>
 </resources>
