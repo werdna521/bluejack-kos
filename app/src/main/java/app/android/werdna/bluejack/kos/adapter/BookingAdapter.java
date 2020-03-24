@@ -30,12 +30,14 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
     private ArrayList<BookingTransaction> _bookingTransactions;
     private Context _context;
     private User _user;
+    private TextView _noBooking;
 
     public BookingAdapter(ArrayList<BookingTransaction> bookingTransactions, Context context,
-                          User user) {
+                          User user, TextView noBooking) {
         _bookingTransactions = bookingTransactions;
         _context = context;
         _user = user;
+        _noBooking = noBooking;
     }
 
     private void updateData(ArrayList<BookingTransaction> bts) {
@@ -67,6 +69,11 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
             public void onPositiveButtonClick() {
                 updateData(filterBookings(BookingTransactionDb.getDb().getAll(), _user));
                 notifyDataSetChanged();
+                if (_bookingTransactions.size() == 0) {
+                    _noBooking.setVisibility(View.VISIBLE);
+                } else {
+                    _noBooking.setVisibility(View.GONE);
+                }
             }
         });
     }

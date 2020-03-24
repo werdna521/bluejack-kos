@@ -34,4 +34,6 @@
     <string name="book">Book</string>
     <string name="booking_success">Booking successful</string>
     <string name="booking_transaction">Booking Transaction</string>
+    <string name="username_not_registered">Username not registered</string>
+    <string name="no_bookings_yet">No bookings yet</string>
 </resources>

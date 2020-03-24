@@ -3,6 +3,7 @@ package app.android.werdna.bluejack.kos.activities;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,6 +57,18 @@ public class MainActivity extends AppCompatActivity {
         return user;
     }
 
+    private boolean isUserRegistered(String username) {
+        boolean registered = false;
+        for (User u: UserDb.getDb().getAll()) {
+            if (u.getUsername().equals(username)) {
+                registered = true;
+                break;
+            }
+        }
+        return registered;
+    }
+
+    @SuppressLint("SetTextI18n")
     private boolean validateInputs() {
         boolean validated = true;
         String username = _usernameEditText.getText().toString();
@@ -65,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
             validated = false;
             _usernameError.setText(R.string.username_must_filled);
             _usernameError.setVisibility(View.VISIBLE);
-        } else if (validateCredentials(username, password)) {
+        } else if (!isUserRegistered(username)) {
             validated = false;
-            _usernameError.setText(R.string.wrong_credentials);
+            _usernameError.setText(R.string.username_not_registered);
             _usernameError.setVisibility(View.VISIBLE);
         } else {
             _usernameError.setVisibility(View.GONE);
@@ -77,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             validated = false;
             _passwordError.setText(R.string.password_must_filled);
             _passwordError.setVisibility(View.VISIBLE);
-        } else if (validateCredentials(username, password)) {
+        } else if (isUserRegistered(username) && validateCredentials(username, password)) {
             validated = false;
             _passwordError.setText(R.string.wrong_credentials);
             _passwordError.setVisibility(View.VISIBLE);

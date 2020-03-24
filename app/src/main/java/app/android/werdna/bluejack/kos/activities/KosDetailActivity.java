@@ -64,6 +64,8 @@ public class KosDetailActivity extends AppCompatActivity {
         _kosLongitude = findViewById(R.id.kos_detail_longitude);
         _toolbar = findViewById(R.id.detail_toolbar);
 
+        _toolbar.setTitle(_kos.getName());
+
         setSupportActionBar(_toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -86,7 +88,6 @@ public class KosDetailActivity extends AppCompatActivity {
         _kosDesc.setText(String.format(Locale.US, "Desc: %s", _kos.getDesc()));
         _kosLatitude.setText(String.format(Locale.US, "Latitude: %s", _kos.getLatitude()));
         _kosLongitude.setText(String.format(Locale.US, "Longitude: %s", _kos.getLongitude()));
-        _toolbar.setTitle(_kos.getName());
     }
 
     private int getLastIdNumber() {

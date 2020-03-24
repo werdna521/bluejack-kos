@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,8 +25,6 @@ import app.android.werdna.bluejack.kos.pojos.User;
 
 public class BookingActivity extends AppCompatActivity {
 
-    private User _user;
-
     public static Intent createIntent(Context context, User _user) {
         Intent intent = new Intent(context, BookingActivity.class);
         intent.putExtra("user", _user);
@@ -36,16 +36,23 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
-        _user = getIntent().getParcelableExtra("user");
+        User user = getIntent().getParcelableExtra("user");
         ArrayList<BookingTransaction> bookingTransactions = filterBookings(BookingTransactionDb.getDb().getAll(),
-                _user);
+                user);
 
         RecyclerView recyclerView = findViewById(R.id.booking_recycler);
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        TextView noBooking = findViewById(R.id.no_booking_text);
+
+        if (bookingTransactions.size() == 0) {
+            noBooking.setVisibility(View.VISIBLE);
+        }
+
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        BookingAdapter adapter = new BookingAdapter(bookingTransactions, BookingActivity.this, _user);
+        BookingAdapter adapter = new BookingAdapter(bookingTransactions, BookingActivity.this,
+                user, noBooking);
         LinearLayoutManager layoutManager = new LinearLayoutManager(BookingActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
