@@ -10,11 +10,12 @@
         android:layout_height="?attr/actionBarSize">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:title="@string/kos_list"
-            app:titleTextColor="@color/white" />
+            app:titleTextColor="@color/white"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

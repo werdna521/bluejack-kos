@@ -13,14 +13,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import app.android.werdna.bluejack.kos.R;
+import app.android.werdna.bluejack.kos.db.UserDb;
+import app.android.werdna.bluejack.kos.pojos.BookingTransaction;
 import app.android.werdna.bluejack.kos.pojos.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REGISTER_USER_CODE = 1;
-    private static final int KOS_LIST_CODE = 2;
-
-    private ArrayList<User> _users;
+    private ArrayList<BookingTransaction> _bookingTransactions;
     private EditText _usernameEditText;
     private EditText _passwordEditText;
     private TextView _usernameError;
@@ -30,29 +29,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        _users = new ArrayList<>();
         _usernameEditText = findViewById(R.id.edit_text_username);
         _passwordEditText = findViewById(R.id.edit_text_password);
         _usernameError = findViewById(R.id.username_error);
         _passwordError = findViewById(R.id.password_error);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == REGISTER_USER_CODE) {
-                if (null != data) {
-                    _users = data.getParcelableArrayListExtra("users");
-                }
-            }
-        }
-    }
-
     private boolean validateCredentials(String username, String password) {
         String registeredPassword = "";
-        for (User u: _users) {
+        for (User u: UserDb.getDb().getAll()) {
             if (u.getUsername().equals(username)) {
                 registeredPassword = u.getPassword();
                 break;
@@ -63,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     private User getLoggedInUser(String username) {
         User user = null;
-        for (User u: _users) {
+        for (User u: UserDb.getDb().getAll()) {
             if (u.getUsername().equals(username)) {
                 user = u;
             }
@@ -104,15 +89,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickRegister(View v) {
-        Intent intent = RegisterActivity.createIntent(MainActivity.this, _users);
-        startActivityForResult(intent, REGISTER_USER_CODE);
+        _usernameEditText.setText("");
+        _passwordEditText.setText("");
+        Intent intent = RegisterActivity.createIntent(MainActivity.this);
+        startActivity(intent);
     }
 
     public void onClickLogin(View v) {
         if (validateInputs()) {
             Intent intent = KosListActivity.createIntent(MainActivity.this,
                     getLoggedInUser(_usernameEditText.getText().toString()));
-            startActivityForResult(intent, KOS_LIST_CODE);
+            _usernameEditText.setText("");
+            _passwordEditText.setText("");
+            startActivity(intent);
         }
     }
 }

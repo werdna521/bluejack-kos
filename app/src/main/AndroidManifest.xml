@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".activities.KosListActivity">
         </activity>
+        <activity android:name=".activities.KosDetailActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import app.android.werdna.bluejack.kos.R;
+import app.android.werdna.bluejack.kos.db.UserDb;
 import app.android.werdna.bluejack.kos.pojos.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -46,10 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton _femaleRadio;
     private RadioGroup _radioGroup;
 
-    public static Intent createIntent(Context context, ArrayList<User> users) {
-        Intent intent = new Intent(context, RegisterActivity.class);
-        intent.putParcelableArrayListExtra("users", users);
-        return intent;
+    public static Intent createIntent(Context context) {
+        return new Intent(context, RegisterActivity.class);
     }
 
     @Override
@@ -57,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        _users = getIntent().getParcelableArrayListExtra("users");
+        _users = UserDb.getDb().getAll();
 
         _usernameEditText = findViewById(R.id.username_edit_text);
         _passwordEditText = findViewById(R.id.password_edit_text);
@@ -186,10 +185,7 @@ public class RegisterActivity extends AppCompatActivity {
                 gender = "Female";
             }
 
-            _users.add(new User(userId, username, password, phoneNumber, gender, dateOfBirth));
-            Intent intent = new Intent();
-            intent.putParcelableArrayListExtra("users", _users);
-            setResult(RESULT_OK, intent);
+            UserDb.getDb().insert(new User(userId, username, password, phoneNumber, gender, dateOfBirth));
             finish();
         }
     }
