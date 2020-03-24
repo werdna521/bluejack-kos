@@ -13,8 +13,7 @@
         <item name="android:fontFamily">@font/sen_extra_bold</item>
     </style>
 
-    <style name="Bluejack.Kos.Widget" parent="Bluejack.Kos">
-    </style>
+    <style name="Bluejack.Kos.Widget" parent="Bluejack.Kos"></style>
 
     <style name="Bluejack.Kos.TextAppearance.Title.White" parent="Bluejack.Kos.TextAppearance">
         <item name="android:textColor">@color/white</item>

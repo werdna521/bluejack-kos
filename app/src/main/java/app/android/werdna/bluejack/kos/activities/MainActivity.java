@@ -1,26 +1,19 @@
 package app.android.werdna.bluejack.kos.activities;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import app.android.werdna.bluejack.kos.R;
 import app.android.werdna.bluejack.kos.db.UserDb;
-import app.android.werdna.bluejack.kos.pojos.BookingTransaction;
 import app.android.werdna.bluejack.kos.pojos.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<BookingTransaction> _bookingTransactions;
     private EditText _usernameEditText;
     private EditText _passwordEditText;
     private TextView _usernameError;
@@ -38,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean validateCredentials(String username, String password) {
         String registeredPassword = "";
-        for (User u: UserDb.getDb().getAll()) {
+        for (User u : UserDb.getDb().getAll()) {
             if (u.getUsername().equals(username)) {
                 registeredPassword = u.getPassword();
                 break;
@@ -49,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private User getLoggedInUser(String username) {
         User user = null;
-        for (User u: UserDb.getDb().getAll()) {
+        for (User u : UserDb.getDb().getAll()) {
             if (u.getUsername().equals(username)) {
                 user = u;
             }
@@ -59,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isUserRegistered(String username) {
         boolean registered = false;
-        for (User u: UserDb.getDb().getAll()) {
+        for (User u : UserDb.getDb().getAll()) {
             if (u.getUsername().equals(username)) {
                 registered = true;
                 break;
@@ -68,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         return registered;
     }
 
-    @SuppressLint("SetTextI18n")
     private boolean validateInputs() {
         boolean validated = true;
         String username = _usernameEditText.getText().toString();

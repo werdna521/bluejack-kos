@@ -20,10 +20,6 @@ public class BookingTransactionDb {
         return _db;
     }
 
-    public BookingTransaction get(int i) {
-        return _bookingTransactions.get(i);
-    }
-
     public ArrayList<BookingTransaction> getAll() {
         return _bookingTransactions;
     }

@@ -69,7 +69,7 @@ public class BookingActivity extends AppCompatActivity {
     private ArrayList<BookingTransaction> filterBookings(ArrayList<BookingTransaction> bookingTransactions,
                                                          User user) {
         ArrayList<BookingTransaction> bts = new ArrayList<>();
-        for (BookingTransaction bt: bookingTransactions) {
+        for (BookingTransaction bt : bookingTransactions) {
             if (bt.getUserId().equals(user.getUserId())) {
                 bts.add(bt);
             }

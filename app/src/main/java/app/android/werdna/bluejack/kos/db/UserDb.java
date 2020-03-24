@@ -20,10 +20,6 @@ public class UserDb {
         return _db;
     }
 
-    public User get(int i) {
-        return _users.get(i);
-    }
-
     public ArrayList<User> getAll() {
         return _users;
     }

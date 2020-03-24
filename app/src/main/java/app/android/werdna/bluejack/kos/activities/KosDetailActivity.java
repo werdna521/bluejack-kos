@@ -38,7 +38,6 @@ public class KosDetailActivity extends AppCompatActivity {
     private TextView _kosDesc;
     private TextView _kosLatitude;
     private TextView _kosLongitude;
-    private MaterialToolbar _toolbar;
 
     public static Intent createIntent(Context context, User user, Kos kos) {
         Intent intent = new Intent(context, KosDetailActivity.class);
@@ -62,11 +61,11 @@ public class KosDetailActivity extends AppCompatActivity {
         _kosDesc = findViewById(R.id.kos_detail_desc);
         _kosLatitude = findViewById(R.id.kos_detail_latitude);
         _kosLongitude = findViewById(R.id.kos_detail_longitude);
-        _toolbar = findViewById(R.id.detail_toolbar);
+        MaterialToolbar toolbar = findViewById(R.id.detail_toolbar);
 
-        _toolbar.setTitle(_kos.getName());
+        toolbar.setTitle(_kos.getName());
 
-        setSupportActionBar(_toolbar);
+        setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         bindData();
@@ -93,10 +92,10 @@ public class KosDetailActivity extends AppCompatActivity {
     private int getLastIdNumber() {
         ArrayList<BookingTransaction> bts = BookingTransactionDb.getDb().getAll();
         if (bts.size() == 0) return 1;
-        BookingTransaction last = bts.get(bts.size()-1);
+        BookingTransaction last = bts.get(bts.size() - 1);
         String lastBookingId = last.getBookingId();
         String numberString = String.format("%c%c%c", lastBookingId.charAt(2), lastBookingId.charAt(3), lastBookingId.charAt(4));
-        return Integer.parseInt(numberString)+1;
+        return Integer.parseInt(numberString) + 1;
     }
 
     private void doBooking(String date) {
@@ -119,7 +118,7 @@ public class KosDetailActivity extends AppCompatActivity {
 
     private boolean checkEligibility() {
         boolean eligible = true;
-        for (BookingTransaction bt: BookingTransactionDb.getDb().getAll()) {
+        for (BookingTransaction bt : BookingTransactionDb.getDb().getAll()) {
             if (bt.getUserId().equals(_user.getUserId()) && bt.getName().equals(_kos.getName())) {
                 eligible = false;
                 break;

@@ -1,11 +1,9 @@
 package app.android.werdna.bluejack.kos.activities;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -20,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import app.android.werdna.bluejack.kos.R;
@@ -43,8 +40,6 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView _termsError;
     private TextView _genderError;
     private TextView _birthdayError;
-    private RadioButton _maleRadio;
-    private RadioButton _femaleRadio;
     private RadioGroup _radioGroup;
 
     public static Intent createIntent(Context context) {
@@ -71,14 +66,12 @@ public class RegisterActivity extends AppCompatActivity {
         _termsError = findViewById(R.id.error_terms);
         _birthdayError = findViewById(R.id.error_birthday);
         _genderError = findViewById(R.id.error_gender);
-        _maleRadio = findViewById(R.id.radio_button_male);
-        _femaleRadio = findViewById(R.id.radio_button_female);
         _radioGroup = findViewById(R.id.radio_group);
     }
 
     private boolean checkUsernameAvailability(String username) {
         boolean available = true;
-        for (User u: _users) {
+        for (User u : _users) {
             if (u.getUsername().equals(username)) {
                 available = false;
                 break;
@@ -172,12 +165,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onClickRegister(View v) {
         if (validateInputs()) {
-            String userId = "US" + String.format(Locale.US, "%03d", _users.size()+1);
+            String userId = "US" + String.format(Locale.US, "%03d", _users.size() + 1);
             String username = _usernameEditText.getText().toString();
             String password = _passwordEditText.getText().toString();
             String phoneNumber = _phoneNumberEditText.getText().toString();
             String dateOfBirth = _birthdayEditText.getText().toString();
-            String gender = "";
+            String gender;
 
             if (_radioGroup.getCheckedRadioButtonId() == R.id.radio_button_male) {
                 gender = "Male";
@@ -203,7 +196,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
                         _birthdayEditText.setText(getResources().getString(R.string.date_format,
-                                dayOfMonth, monthOfYear+1, year));
+                                dayOfMonth, monthOfYear + 1, year));
                     }
                 }, y, m, d);
         datePickerDialog.show();

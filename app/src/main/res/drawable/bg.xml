@@ -7,18 +7,18 @@
     <item
         android:width="161dp"
         android:height="200dp"
-        android:top="52dp"
-        android:drawable="@drawable/left_circle" />
+        android:drawable="@drawable/left_circle"
+        android:top="52dp" />
     <item
         android:width="159dp"
         android:height="250dp"
+        android:drawable="@drawable/right_circle"
         android:gravity="right|end"
-        android:top="136dp"
-        android:drawable="@drawable/right_circle" />
+        android:top="136dp" />
     <item
         android:width="100dp"
         android:height="68dp"
+        android:drawable="@drawable/top_circle"
         android:left="232dp"
-        android:start="232dp"
-        android:drawable="@drawable/top_circle" />
+        android:start="232dp" />
 </layer-list>
