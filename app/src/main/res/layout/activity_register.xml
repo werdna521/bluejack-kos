@@ -1,193 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@drawable/bg"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="24dp"
-    tools:context=".activities.MainActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/white"
-        app:cardCornerRadius="16dp">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        tools:context=".activities.MainActivity">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                style="@style/Bluejack.Kos.TextApperance.Heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/register_text"
-                android:textAlignment="center" />
-
-            <EditText
-                android:id="@+id/username_edit_text"
-                style="@style/Bluejack.Kos.Widget.EditText"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/username"
-                android:inputType="text" />
+                android:layout_marginTop="32dp"
+                android:background="@android:color/white"
+                app:cardCornerRadius="16dp">
 
-            <TextView
-                android:id="@+id/error_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="12sp"
-                android:visibility="gone" />
-
-            <EditText
-                android:id="@+id/password_edit_text"
-                style="@style/Bluejack.Kos.Widget.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/password"
-                android:inputType="textPassword" />
-
-            <TextView
-                android:id="@+id/error_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="12sp"
-                android:visibility="gone" />
-
-            <EditText
-                android:id="@+id/confirm_password_edit_text"
-                style="@style/Bluejack.Kos.Widget.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/confirm_password"
-                android:inputType="textPassword" />
-
-            <TextView
-                android:id="@+id/error_confirm_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="12sp"
-                android:visibility="gone" />
-
-            <EditText
-                android:id="@+id/phone_number_edit_text"
-                style="@style/Bluejack.Kos.Widget.EditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/phone_number"
-                android:inputType="phone" />
-
-            <TextView
-                android:id="@+id/error_phone_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="12sp"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/birthday_edit_text"
-                    style="@style/Bluejack.Kos.Widget.EditText"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:enabled="false"
-                    android:hint="@string/date_of_birth"
-                    android:inputType="date" />
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <Button
-                    style="@style/Bluejack.Kos.Widget.Button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_weight="1"
-                    android:onClick="onClickDate"
-                    android:text="@string/pick_date" />
+                    <TextView
+                        style="@style/Bluejack.Kos.TextApperance.Heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/register_text"
+                        android:textAlignment="center" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/username_edit_text"
+                        style="@style/Bluejack.Kos.Widget.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/username"
+                        android:inputType="text" />
 
-            <TextView
-                android:id="@+id/error_birthday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="12sp"
-                android:visibility="gone" />
+                    <TextView
+                        android:id="@+id/error_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
 
-            <RadioGroup
-                android:id="@+id/radio_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/password_edit_text"
+                        style="@style/Bluejack.Kos.Widget.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/password"
+                        android:inputType="textPassword" />
 
-                <RadioButton
-                    android:id="@+id/radio_button_male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/male" />
+                    <TextView
+                        android:id="@+id/error_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
 
-                <RadioButton
-                    android:id="@+id/radio_button_female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/female" />
+                    <EditText
+                        android:id="@+id/confirm_password_edit_text"
+                        style="@style/Bluejack.Kos.Widget.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/confirm_password"
+                        android:inputType="textPassword" />
 
-            </RadioGroup>
+                    <TextView
+                        android:id="@+id/error_confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/error_gender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="12sp"
-                android:visibility="gone" />
+                    <EditText
+                        android:id="@+id/phone_number_edit_text"
+                        style="@style/Bluejack.Kos.Widget.EditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/phone_number"
+                        android:inputType="phone" />
 
-            <CheckBox
-                android:id="@+id/terms_checkbox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:buttonTint="@color/colorPrimaryDark"
-                android:text="@string/terms_message" />
+                    <TextView
+                        android:id="@+id/error_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/error_terms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="12sp"
-                android:visibility="gone" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
 
-            <Button
-                style="@style/Bluejack.Kos.Widget.Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:onClick="onClickRegister"
-                android:text="@string/register" />
+                        <EditText
+                            android:id="@+id/birthday_edit_text"
+                            style="@style/Bluejack.Kos.Widget.EditText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:enabled="false"
+                            android:hint="@string/date_of_birth"
+                            android:inputType="date" />
 
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
+                        <Button
+                            style="@style/Bluejack.Kos.Widget.Button"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            android:onClick="onClickDate"
+                            android:text="@string/pick_date" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/error_birthday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <RadioGroup
+                        android:id="@+id/radio_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radio_button_male"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/male" />
+
+                        <RadioButton
+                            android:id="@+id/radio_button_female"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/female" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/error_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <CheckBox
+                        android:id="@+id/terms_checkbox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:buttonTint="@color/colorPrimaryDark"
+                        android:text="@string/terms_message" />
+
+                    <TextView
+                        android:id="@+id/error_terms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <Button
+                        style="@style/Bluejack.Kos.Widget.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:onClick="onClickRegister"
+                        android:text="@string/register" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>
