@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".activities.KosDetailActivity">
         </activity>
+        <activity android:name=".activities.BookingActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +23,7 @@ import app.android.werdna.bluejack.kos.pojos.User;
 public class KosListActivity extends AppCompatActivity {
 
     private ArrayList<Kos> _kos;
+    private User _user;
 
     public static Intent createIntent(Context context, User user) {
         Intent intent = new Intent(context, KosListActivity.class);
@@ -37,10 +37,10 @@ public class KosListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kos_list);
 
         init();
-        User user = getIntent().getParcelableExtra("user");
+        _user = getIntent().getParcelableExtra("user");
 
         RecyclerView recyclerView = findViewById(R.id.kos_list_recycler);
-        KosAdapter adapter = new KosAdapter(_kos, KosListActivity.this, user);
+        KosAdapter adapter = new KosAdapter(_kos, KosListActivity.this, _user);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -58,7 +58,8 @@ public class KosListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.booking_transaction_menu_item) {
-            Toast.makeText(this, "Booking", Toast.LENGTH_SHORT).show();
+            Intent intent = BookingActivity.createIntent(KosListActivity.this, _user);
+            startActivity(intent);
         } else if (item.getItemId() == R.id.logout_menu_item) {
             finish();
         }

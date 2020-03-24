@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -15,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 import app.android.werdna.bluejack.kos.R;
 import app.android.werdna.bluejack.kos.db.BookingTransactionDb;
@@ -61,7 +64,18 @@ public class KosDetailActivity extends AppCompatActivity {
         _kosLongitude = findViewById(R.id.kos_detail_longitude);
         _toolbar = findViewById(R.id.detail_toolbar);
 
+        setSupportActionBar(_toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         bindData();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void bindData() {
@@ -75,8 +89,17 @@ public class KosDetailActivity extends AppCompatActivity {
         _toolbar.setTitle(_kos.getName());
     }
 
+    private int getLastIdNumber() {
+        ArrayList<BookingTransaction> bts = BookingTransactionDb.getDb().getAll();
+        if (bts.size() == 0) return 1;
+        BookingTransaction last = bts.get(bts.size()-1);
+        String lastBookingId = last.getBookingId();
+        String numberString = String.format("%c%c%c", lastBookingId.charAt(2), lastBookingId.charAt(3), lastBookingId.charAt(4));
+        return Integer.parseInt(numberString)+1;
+    }
+
     private void doBooking(String date) {
-        String bookingId = "BK" + String.format(Locale.US, "%03d", BookingTransactionDb.getDb().getAll().size()+1);
+        String bookingId = "BK" + String.format(Locale.US, "%03d", getLastIdNumber());
         String userId = _user.getUserId();
         String name = _kos.getName();
         String facility = _kos.getFacility();

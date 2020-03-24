@@ -31,4 +31,8 @@ public class BookingTransactionDb {
     public void insert(BookingTransaction bt) {
         _bookingTransactions.add(bt);
     }
+
+    public void remove(BookingTransaction bt) {
+        _bookingTransactions.remove(bt);
+    }
 }
