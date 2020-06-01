@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 
 import app.android.werdna.bluejack.kos.R;
 import app.android.werdna.bluejack.kos.db.UserDb;
+import app.android.werdna.bluejack.kos.db.UserRepository;
 import app.android.werdna.bluejack.kos.pojos.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -69,17 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
         _radioGroup = findViewById(R.id.radio_group);
     }
 
-    private boolean checkUsernameAvailability(String username) {
-        boolean available = true;
-        for (User u : _users) {
-            if (u.getUsername().equals(username)) {
-                available = false;
-                break;
-            }
-        }
-        return available;
-    }
-
     private boolean validateInputs() {
         boolean validated = true;
         String username = _usernameEditText.getText().toString();
@@ -96,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
             validated = false;
             _usernameError.setText(R.string.username_alphanumeric_error);
             _usernameError.setVisibility(View.VISIBLE);
-        } else if (!checkUsernameAvailability(username)) {
+        } else if (UserRepository.with(this).isRegistered(username)) {
             validated = false;
             _usernameError.setText(R.string.username_taken_error);
             _usernameError.setVisibility(View.VISIBLE);
@@ -178,7 +168,9 @@ public class RegisterActivity extends AppCompatActivity {
                 gender = "Female";
             }
 
-            UserDb.getDb().insert(new User(userId, username, password, phoneNumber, gender, dateOfBirth));
+//            UserDb.getDb().insert(new User(userId, username, password, phoneNumber, gender, dateOfBirth));
+            UserRepository.with(this).register(new User(userId, username,
+                    password, phoneNumber, gender, dateOfBirth));
             finish();
         }
     }
