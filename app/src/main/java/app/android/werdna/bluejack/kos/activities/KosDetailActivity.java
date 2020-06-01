@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
@@ -80,7 +81,10 @@ public class KosDetailActivity extends AppCompatActivity {
     }
 
     private void bindData() {
-        _kosImage.setImageResource(_kos.getDrawableResource());
+        Glide
+            .with(this)
+            .load(_kos.getImageURL())
+            .into(_kosImage);
         _kosName.setText(_kos.getName());
         _kosPrice.setText(String.format(Locale.US, "Rp%d", _kos.getPrice()));
         _kosFacility.setText(String.format(Locale.US, "Facility: %s", _kos.getFacility()));
@@ -153,5 +157,11 @@ public class KosDetailActivity extends AppCompatActivity {
                     }
                 }, y, m, d);
         datePickerDialog.show();
+    }
+
+    public void onClickLocation(View v) {
+        Intent intent = MapActivity.createIntent(KosDetailActivity.this,
+                _kos.getLatitude(), _kos.getLongitude(), _kos.getName());
+        startActivity(intent);
     }
 }

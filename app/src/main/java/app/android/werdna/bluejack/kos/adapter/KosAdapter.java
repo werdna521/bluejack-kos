@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -31,6 +32,11 @@ public class KosAdapter extends RecyclerView.Adapter<KosAdapter.KosHolder> {
         _kos = kos;
         _context = context;
         _user = user;
+    }
+
+    public void setKosList(ArrayList<Kos> kosList) {
+        _kos = kosList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -72,7 +78,10 @@ public class KosAdapter extends RecyclerView.Adapter<KosAdapter.KosHolder> {
         }
 
         void bind(final Kos k) {
-            _imageView.setImageResource(k.getDrawableResource());
+            Glide
+                .with(_context)
+                .load(k.getImageURL())
+                .into(_imageView);
             _kosName.setText(k.getName());
             _kosPrice.setText(String.format(Locale.US, "Rp%d", k.getPrice()));
             _kosFacility.setText(String.format(Locale.US, "Facilities: %s", k.getFacility()));

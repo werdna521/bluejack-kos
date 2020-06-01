@@ -19,11 +19,13 @@ import app.android.werdna.bluejack.kos.R;
 import app.android.werdna.bluejack.kos.adapter.KosAdapter;
 import app.android.werdna.bluejack.kos.pojos.Kos;
 import app.android.werdna.bluejack.kos.pojos.User;
+import app.android.werdna.bluejack.kos.services.KosService;
 
 public class KosListActivity extends AppCompatActivity {
 
     private ArrayList<Kos> _kos;
     private User _user;
+    private KosAdapter _adapter;
 
     public static Intent createIntent(Context context, User user) {
         Intent intent = new Intent(context, KosListActivity.class);
@@ -40,10 +42,10 @@ public class KosListActivity extends AppCompatActivity {
         _user = getIntent().getParcelableExtra("user");
 
         RecyclerView recyclerView = findViewById(R.id.kos_list_recycler);
-        KosAdapter adapter = new KosAdapter(_kos, KosListActivity.this, _user);
+        _adapter = new KosAdapter(_kos, KosListActivity.this, _user);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(_adapter);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -68,9 +70,16 @@ public class KosListActivity extends AppCompatActivity {
 
     private void init() {
         _kos = new ArrayList<>();
-        _kos.add(new Kos("Maharaja", "AC, WiFi, Bathroom", 1450000,
-                "The best boarding", -6.2000809, 106.7833355, R.drawable.maharaja));
-        _kos.add(new Kos("Haji Indra", "AC, WiFi", 1900000,
-                "The cheapest boarding", -6.2261741, 106.9078293, R.drawable.haji_indra));
+        KosService.retrieveKos(this, new KosService.OnKosReadyCallback() {
+            @Override
+            public void onKosDataParsed(ArrayList<Kos> kosList) {
+                _adapter.setKosList(kosList);
+            }
+        });
+//        _kos = new ArrayList<>();
+//        _kos.add(new Kos("Maharaja", "AC, WiFi, Bathroom", 1450000,
+//                "The best boarding", 106.7833355, -6.2000809, R.drawable.maharaja));
+//        _kos.add(new Kos("Haji Indra", "AC, WiFi", 1900000,
+//                "The cheapest boarding", 106.9078293, -6.2261741, R.drawable.haji_indra));
     }
 }

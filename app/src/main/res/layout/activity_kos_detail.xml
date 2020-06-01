@@ -102,6 +102,14 @@
                 android:layout_marginTop="8dp"
                 android:onClick="onClickBooking"
                 android:text="@string/book" />
+
+            <Button
+                style="@style/Bluejack.Kos.Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:onClick="onClickLocation"
+                android:text="@string/kos_location" />
         </LinearLayout>
     </ScrollView>
 
