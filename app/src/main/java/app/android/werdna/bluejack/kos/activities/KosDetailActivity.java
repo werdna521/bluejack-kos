@@ -23,7 +23,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 import app.android.werdna.bluejack.kos.R;
-import app.android.werdna.bluejack.kos.db.BookingTransactionDb;
+import app.android.werdna.bluejack.kos.db.BookingTransactionRepository;
 import app.android.werdna.bluejack.kos.pojos.BookingTransaction;
 import app.android.werdna.bluejack.kos.pojos.Kos;
 import app.android.werdna.bluejack.kos.pojos.User;
@@ -94,7 +94,7 @@ public class KosDetailActivity extends AppCompatActivity {
     }
 
     private int getLastIdNumber() {
-        ArrayList<BookingTransaction> bts = BookingTransactionDb.getDb().getAll();
+        ArrayList<BookingTransaction> bts = BookingTransactionRepository.with(this).getAll();
         if (bts.size() == 0) return 1;
         BookingTransaction last = bts.get(bts.size() - 1);
         String lastBookingId = last.getBookingId();
@@ -115,15 +115,15 @@ public class KosDetailActivity extends AppCompatActivity {
         BookingTransaction bt = new BookingTransaction(bookingId, userId, name, facility, price,
                 desc, longitude, latitude, date);
 
-        BookingTransactionDb.getDb().insert(bt);
+        BookingTransactionRepository.with(this).insert(bt);
         Toast.makeText(KosDetailActivity.this, getString(R.string.booking_success),
                 Toast.LENGTH_SHORT).show();
     }
 
     private boolean checkEligibility() {
         boolean eligible = true;
-        for (BookingTransaction bt : BookingTransactionDb.getDb().getAll()) {
-            if (bt.getUserId().equals(_user.getUserId()) && bt.getName().equals(_kos.getName())) {
+        for (BookingTransaction bt : BookingTransactionRepository.with(this).get(_user)) {
+            if (bt.getName().equals(_kos.getName())) {
                 eligible = false;
                 break;
             }

@@ -19,7 +19,7 @@ import java.util.Objects;
 
 import app.android.werdna.bluejack.kos.R;
 import app.android.werdna.bluejack.kos.adapter.BookingAdapter;
-import app.android.werdna.bluejack.kos.db.BookingTransactionDb;
+import app.android.werdna.bluejack.kos.db.BookingTransactionRepository;
 import app.android.werdna.bluejack.kos.pojos.BookingTransaction;
 import app.android.werdna.bluejack.kos.pojos.User;
 
@@ -37,8 +37,7 @@ public class BookingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_booking);
 
         User user = getIntent().getParcelableExtra("user");
-        ArrayList<BookingTransaction> bookingTransactions = filterBookings(BookingTransactionDb.getDb().getAll(),
-                user);
+        ArrayList<BookingTransaction> bookingTransactions = BookingTransactionRepository.with(this).get(user);
 
         RecyclerView recyclerView = findViewById(R.id.booking_recycler);
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
@@ -64,16 +63,5 @@ public class BookingActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private ArrayList<BookingTransaction> filterBookings(ArrayList<BookingTransaction> bookingTransactions,
-                                                         User user) {
-        ArrayList<BookingTransaction> bts = new ArrayList<>();
-        for (BookingTransaction bt : bookingTransactions) {
-            if (bt.getUserId().equals(user.getUserId())) {
-                bts.add(bt);
-            }
-        }
-        return bts;
     }
 }

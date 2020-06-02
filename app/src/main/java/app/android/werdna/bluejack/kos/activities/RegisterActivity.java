@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -21,13 +20,11 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 import app.android.werdna.bluejack.kos.R;
-import app.android.werdna.bluejack.kos.db.UserDb;
 import app.android.werdna.bluejack.kos.db.UserRepository;
 import app.android.werdna.bluejack.kos.pojos.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private ArrayList<User> _users;
     private EditText _usernameEditText;
     private EditText _passwordEditText;
     private EditText _confirmPasswordEditText;
@@ -51,8 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        _users = UserDb.getDb().getAll();
 
         _usernameEditText = findViewById(R.id.username_edit_text);
         _passwordEditText = findViewById(R.id.password_edit_text);
@@ -155,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onClickRegister(View v) {
         if (validateInputs()) {
-            String userId = "US" + String.format(Locale.US, "%03d", _users.size() + 1);
+            String userId = "US" + String.format(Locale.US, "%03d", UserRepository.with(this).getLastId()+1);
             String username = _usernameEditText.getText().toString();
             String password = _passwordEditText.getText().toString();
             String phoneNumber = _phoneNumberEditText.getText().toString();
@@ -168,7 +163,6 @@ public class RegisterActivity extends AppCompatActivity {
                 gender = "Female";
             }
 
-//            UserDb.getDb().insert(new User(userId, username, password, phoneNumber, gender, dateOfBirth));
             UserRepository.with(this).register(new User(userId, username,
                     password, phoneNumber, gender, dateOfBirth));
             finish();

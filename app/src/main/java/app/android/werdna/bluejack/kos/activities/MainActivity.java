@@ -1,7 +1,9 @@
 package app.android.werdna.bluejack.kos.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,11 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import app.android.werdna.bluejack.kos.R;
-import app.android.werdna.bluejack.kos.db.UserDb;
 import app.android.werdna.bluejack.kos.db.UserRepository;
-import app.android.werdna.bluejack.kos.pojos.User;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int SMS_PERMISSION_CODE = 1;
 
     private EditText _usernameEditText;
     private EditText _passwordEditText;
@@ -24,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActivityCompat.requestPermissions(this, new String[] {
+                Manifest.permission.SEND_SMS }, SMS_PERMISSION_CODE);
+
         _usernameEditText = findViewById(R.id.edit_text_username);
         _passwordEditText = findViewById(R.id.edit_text_password);
         _usernameError = findViewById(R.id.username_error);
