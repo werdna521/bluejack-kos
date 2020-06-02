@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.telephony.SmsManager;
 
 import app.android.werdna.bluejack.kos.pojos.User;
 
@@ -38,6 +39,9 @@ public class UserRepository {
             null,
             contentValues
         );
+
+        SmsManager.getDefault().sendTextMessage(user.getPhoneNumber(), null,
+                "Your number is registered to Bluejack Kos", null, null);
     }
 
     public User getUser(String username) {
@@ -61,6 +65,21 @@ public class UserRepository {
         );
         cursor.close();
         return user;
+    }
+
+    public int getLastId() {
+        Cursor cursor = _db.query(
+            TABLE_NAME,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+        int total = cursor.getCount();
+        cursor.close();
+        return total;
     }
 
     public boolean authenticate(String username, String password) {
