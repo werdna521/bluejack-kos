@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import app.android.werdna.bluejack.kos.R;
 import app.android.werdna.bluejack.kos.db.BookingTransactionDb;
+import app.android.werdna.bluejack.kos.db.BookingTransactionRepository;
 import app.android.werdna.bluejack.kos.pojos.BookingTransaction;
 import app.android.werdna.bluejack.kos.pojos.User;
 
@@ -44,17 +45,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
         _bookingTransactions = bts;
     }
 
-    private ArrayList<BookingTransaction> filterBookings(ArrayList<BookingTransaction> bookingTransactions,
-                                                         User user) {
-        ArrayList<BookingTransaction> bts = new ArrayList<>();
-        for (BookingTransaction bt : bookingTransactions) {
-            if (bt.getUserId().equals(user.getUserId())) {
-                bts.add(bt);
-            }
-        }
-        return bts;
-    }
-
     @NonNull
     @Override
     public BookingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -67,7 +57,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
         holder.bind(_bookingTransactions.get(position), _context, new ClickHandler() {
             @Override
             public void onPositiveButtonClick() {
-                updateData(filterBookings(BookingTransactionDb.getDb().getAll(), _user));
+                updateData(BookingTransactionRepository.with(_context).get(_user));
                 notifyDataSetChanged();
                 if (_bookingTransactions.size() == 0) {
                     _noBooking.setVisibility(View.VISIBLE);
@@ -111,7 +101,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingH
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    BookingTransactionDb.getDb().remove(bt);
+                                    BookingTransactionRepository.with(context).remove(bt);
                                     ch.onPositiveButtonClick();
                                     dialog.dismiss();
                                     Toast.makeText(context, "Booking cancelled", Toast.LENGTH_SHORT)

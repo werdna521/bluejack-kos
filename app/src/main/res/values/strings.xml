@@ -36,4 +36,5 @@
     <string name="booking_transaction">Booking Transaction</string>
     <string name="username_not_registered">Username not registered</string>
     <string name="no_bookings_yet">No bookings yet</string>
+    <string name="kos_location">Kos Location</string>
 </resources>

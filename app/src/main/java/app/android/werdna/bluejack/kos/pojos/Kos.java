@@ -11,17 +11,17 @@ public class Kos implements Parcelable {
     private String _desc;
     private Double _longitude;
     private Double _latitude;
-    private Integer _drawableResource;
+    private String _imageURL;
 
     public Kos(String name, String facility, Integer price, String desc, Double longitude, Double latitude,
-               Integer drawableResource) {
+               String imageURL) {
         _name = name;
         _facility = facility;
         _price = price;
         _desc = desc;
         _longitude = longitude;
         _latitude = latitude;
-        _drawableResource = drawableResource;
+        _imageURL = imageURL;
     }
 
     private Kos(Parcel in) {
@@ -31,7 +31,7 @@ public class Kos implements Parcelable {
         _desc = in.readString();
         _longitude = in.readDouble();
         _latitude = in.readDouble();
-        _drawableResource = in.readInt();
+        _imageURL = in.readString();
     }
 
     public static final Creator<Kos> CREATOR = new Creator<Kos>() {
@@ -63,7 +63,7 @@ public class Kos implements Parcelable {
         dest.writeString(_desc);
         dest.writeDouble(_longitude);
         dest.writeDouble(_latitude);
-        dest.writeInt(_drawableResource);
+        dest.writeString(_imageURL);
     }
 
     public String getName() {
@@ -110,12 +110,12 @@ public class Kos implements Parcelable {
         return _latitude;
     }
 
-    public Integer getDrawableResource() {
-        return _drawableResource;
+    public String getImageURL() {
+        return _imageURL;
     }
 
-    public void setDrawableResource(Integer drawableResource) {
-        _drawableResource = drawableResource;
+    public void setImageURL(String imageURL) {
+        _imageURL = imageURL;
     }
 
     public void setLatitude(Double latitude) {
